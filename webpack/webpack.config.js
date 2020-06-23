@@ -25,22 +25,17 @@ module.exports = {
       {
         test: /\.ts$/,
         use: "ts-loader",
-      }
+      },
     ],
   },
   resolve: {
-    modules: [
-      path.resolve(sourceDir),
-      "node_modules",
-    ],
+    modules: [path.resolve(sourceDir), "node_modules"],
     extensions: [".ts", ".js"],
   },
-  plugins: [
-    new HtmlWebpackPlugin(htmlWebpackPluginOptions),
-  ],
+  plugins: [new HtmlWebpackPlugin(htmlWebpackPluginOptions)],
   devServer: {
     host: "0.0.0.0",
     port: 8080,
     contentBase: [publicDir, assetDir],
-  }
+  },
 };
