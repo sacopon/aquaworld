@@ -6,7 +6,6 @@ import {
 import { getWindowSizeAsync } from "application/utils/get_window_size_async";
 
 async function mainProgram() {
-  debugger;
   disableOuterCanvasTouchEvent();
   const size = await getWindowSizeAsync();
   console.info(size);
