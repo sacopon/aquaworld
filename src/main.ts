@@ -33,10 +33,12 @@ async function mainProgram() {
   disableTouchEvent(app.view);
   document.body.appendChild(app.view);
 
-  app.loader.add("sprite", `${window.location.origin}/sprite.png`);
-  app.loader.load((loader: PIXI.Loader, resources: any) => {
-    console.info(resources);
-    const sprite = new PIXI.Sprite(resources.sprite.texture);
+  const url = `${window.location.origin}/assets/character.json`;
+  app.loader.add(url);
+  app.loader.load((_: PIXI.Loader, resources: any) => {
+    const sprite = new PIXI.Sprite(resources[url].spritesheet!.textures["stay.png"]);
+    // sprite.x = Math.floor((screen.resolution.width - sprite.width) / 2);
+    // sprite.y = Math.floor((screen.resolution.height - sprite.height) / 2);
     sprite.x = screen.resolution.width - sprite.width;
     app.stage.addChild(sprite);
   });
