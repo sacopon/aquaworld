@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // ディレクトリ設定
 const sourceDir = path.join(__dirname, "../src");
 const publicDir = path.join(__dirname, "../dist");
-const assetDir = path.join(__dirname, "../assets");
+const assetDir = path.join(__dirname, "../assets/dist");
 
 // プラグイン設定
 const htmlWebpackPluginOptions = {
