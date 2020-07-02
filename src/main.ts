@@ -2,6 +2,9 @@ import * as PIXI from "pixi.js";
 import { screen } from "application/config/configuration";
 import { disableTouchEvent, disableOuterCanvasTouchEvent } from "application/utils/disable_touch_event";
 import { getWindowSizeAsync } from "application/utils/get_window_size_async";
+import { SpriteSheetRepository } from "presentation/services/sprite_sheet_repository";
+import { PresentationServiceLocator } from "presentation/services/presentation_service_locator";
+import { SpriteCreator } from "presentation/services/sprite_creator";
 
 async function mainProgram() {
   const clientSize = await getWindowSizeAsync();
@@ -33,12 +36,13 @@ async function mainProgram() {
   disableTouchEvent(app.view);
   document.body.appendChild(app.view);
 
+  PresentationServiceLocator.spriteSheetRepository = new SpriteSheetRepository();
+
   const url = `${window.location.origin}/assets/character.json`;
   app.loader.add(url);
   app.loader.load((_: PIXI.Loader, resources: any) => {
-    const sprite = new PIXI.Sprite(resources[url].spritesheet!.textures["stay.png"]);
-    // sprite.x = Math.floor((screen.resolution.width - sprite.width) / 2);
-    // sprite.y = Math.floor((screen.resolution.height - sprite.height) / 2);
+    PresentationServiceLocator.spriteSheetRepository.addSpriteSheet(url, resources[url].spritesheet!);
+    const sprite = SpriteCreator.create("stay.png");
     sprite.x = screen.resolution.width - sprite.width;
     app.stage.addChild(sprite);
   });
